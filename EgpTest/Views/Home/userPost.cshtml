@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "userPost";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="col-lg-8">
+    <div class="card">
+        <div class="card-header d-flex align-items-center">
+            <h4>Enter your number</h4>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("UserPost", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <label for="inlineFormInput" class="sr-only">Enter number</label>
+                    <input name="userInput" type="number" placeholder="Enter number" class="mr-3 form-control">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="mr-3 btn btn-primary">
+                </div>                
+            }
+        </div>
+    </div>
+</div>
+@if (ViewBag.Maresults != null)
+{
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Mini and Maxi for @ViewBag.inputedNumber</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Mini</th>
+                                <th>Maxi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">#</th>
+                                <td>@ViewBag.Maresults</td>
+                                <td>@ViewBag.Maresults</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
